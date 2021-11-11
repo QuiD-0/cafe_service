@@ -6,9 +6,10 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class JpaUserRepo implements UserRepository{
+public class JpaUserRepo implements UserRepository {
 
     private final EntityManager em;
+
     public JpaUserRepo(EntityManager em) {
         this.em = em;
     }
@@ -21,11 +22,21 @@ public class JpaUserRepo implements UserRepository{
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
+        User users = em.find(User.class,id);
+        return Optional.ofNullable(users);
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        return em.createQuery("select m from User m",User.class).getResultList();
+    }
+
+    @Override
+    public User update(User user) {
+        User newUser = em.find(User.class,user.getId());
+        newUser.setName(user.getName());
+        newUser.setCash(user.getCash());
+        newUser.setAdmin(user.isAdmin());
+        return newUser;
     }
 }

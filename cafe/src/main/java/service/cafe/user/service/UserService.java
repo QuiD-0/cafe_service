@@ -28,4 +28,6 @@ public class UserService {
     public Optional<User> findOne(Long userId){
         return userRepository.findById(userId);
     }
+
+    public User updateUser(User user){return userRepository.update(user);}
 }
