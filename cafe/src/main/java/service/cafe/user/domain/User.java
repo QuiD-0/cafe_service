@@ -1,11 +1,14 @@
 package service.cafe.user.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@DynamicUpdate
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,5 +55,6 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
 
 }
