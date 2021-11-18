@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("")
-    public List<User> users() {
+    public List<User> showUsers() {
         List<User> users = userService.findUsers();
         return users;
     }
