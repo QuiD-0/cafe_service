@@ -7,7 +7,6 @@ import service.cafe.user.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 public class UserService {
 
     public UserService(UserRepository userRepository) {
@@ -16,18 +15,22 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Long join(User user){
-         userRepository.save(user);
-         return user.getId();
+    @Transactional
+    public Long join(User user) {
+        userRepository.save(user);
+        return user.getId();
     }
 
-    public List<User> findUsers(){
+    public List<User> findUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findOne(Long userId){
+    public Optional<User> findOne(Long userId) {
         return userRepository.findById(userId);
     }
 
-    public User updateUser(User user,Long id){return userRepository.update(user,id);}
+    @Transactional
+    public User updateUser(User user, Long id) {
+        return userRepository.update(user, id);
+    }
 }
