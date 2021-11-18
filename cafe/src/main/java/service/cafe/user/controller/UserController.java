@@ -1,9 +1,7 @@
 package service.cafe.user.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.cafe.user.domain.User;
-import service.cafe.user.repository.UserRepository;
 import service.cafe.user.service.UserService;
 
 import java.util.List;
@@ -13,10 +11,11 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    UserService userService;
-    @Autowired
-    UserRepository userRepository;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("")
     public List<User> users() {
