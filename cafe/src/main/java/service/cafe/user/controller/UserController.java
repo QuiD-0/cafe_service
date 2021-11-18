@@ -13,28 +13,32 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired UserService userService;
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("")
-    public List<User> helloSpring() {
+    public List<User> users() {
         List<User> users = userService.findUsers();
-        return users; }
+        return users;
+    }
 
-    @PostMapping("/new")
-    public User newUser(@RequestBody User user){
+    @PostMapping("/")
+    public User newUser(@RequestBody User user) {
         userService.join(user);
         return user;
     }
 
     @GetMapping(path = "/{userId}")
-    public Optional<User> findUser(@PathVariable(name = "userId") Long id){
+    public Optional<User> findUser(@PathVariable(name = "userId") Long id) {
         Optional<User> user = userService.findOne(id);
         return user;
     }
-    @PostMapping("/update")
-    public User updateUser(@RequestBody User user){
-        userService.updateUser(user);
+
+    @PutMapping("/{userId}")
+    public User updateUser(@RequestBody User user, @PathVariable(name = "userId") Long id) {
+        userService.updateUser(user, id);
         return user;
     }
 

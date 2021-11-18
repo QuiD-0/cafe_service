@@ -29,5 +29,5 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public User updateUser(User user){return userRepository.update(user);}
+    public User updateUser(User user,Long id){return userRepository.update(user,id);}
 }

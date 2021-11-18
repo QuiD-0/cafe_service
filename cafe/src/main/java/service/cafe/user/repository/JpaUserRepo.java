@@ -22,18 +22,18 @@ public class JpaUserRepo implements UserRepository {
 
     @Override
     public Optional<User> findById(Long id) {
-        User users = em.find(User.class,id);
+        User users = em.find(User.class, id);
         return Optional.ofNullable(users);
     }
 
     @Override
     public List<User> findAll() {
-        return em.createQuery("select m from User m",User.class).getResultList();
+        return em.createQuery("select m from User m", User.class).getResultList();
     }
 
     @Override
-    public User update(User user) {
-        User newUser = em.find(User.class,user.getId());
+    public User update(User user, Long id) {
+        User newUser = em.find(User.class, id);
         newUser.setName(user.getName());
         newUser.setCash(user.getCash());
         newUser.setAdmin(user.isAdmin());

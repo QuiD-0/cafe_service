@@ -11,7 +11,8 @@ import javax.persistence.Id;
 @DynamicUpdate
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int cash;
@@ -33,6 +34,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -40,6 +42,7 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
     public int getCash() {
         return cash;
     }
