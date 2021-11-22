@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import service.cafe.product.repository.JpaProductRepository;
 import service.cafe.product.repository.ProductRepository;
+import service.cafe.product.service.DeleteProductService;
+import service.cafe.product.service.FindProductService;
+import service.cafe.product.service.SaveProductService;
+import service.cafe.product.service.UpdateProductService;
 import service.cafe.user.controller.UserController;
 import service.cafe.user.repository.JpaUserRepo;
 import service.cafe.user.repository.UserRepository;
@@ -34,4 +38,28 @@ public class SpringConfig {
         return new JpaUserRepo(em);
     }
 
+    @Bean
+    public ProductRepository productRepository() {
+        return new JpaProductRepository(em);
+    }
+
+    @Bean
+    public FindProductService findProductService() {
+        return new FindProductService(productRepository());
+    }
+
+    @Bean
+    public SaveProductService saveProductService() {
+        return new SaveProductService(productRepository());
+    }
+
+    @Bean
+    public UpdateProductService updateProductService() {
+        return new UpdateProductService(productRepository());
+    }
+
+    @Bean
+    public DeleteProductService deleteProductService() {
+        return new DeleteProductService(productRepository());
+    }
 }
