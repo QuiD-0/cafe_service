@@ -12,7 +12,7 @@ public class SaveProductService {
         this.productRepository = productRepository;
     }
 
-    public Product new_Product(Product product) {
+    public Product newProduct(Product product) {
         return productRepository.save(product);
     }
 }

@@ -11,7 +11,7 @@ public class DeleteProductService {
         this.productRepository = productRepository;
     }
 
-    public boolean delete_Product(Long id) {
+    public boolean deleteProduct(Long id) {
         return productRepository.delete(id);
     }
 }

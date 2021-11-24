@@ -12,7 +12,7 @@ public class UpdateProductService {
         this.productRepository = productRepository;
     }
 
-    public Product update(Product product, Long id) {
+    public Product updateProduct(Product product, Long id) {
         return productRepository.update(product, id);
     }
 
