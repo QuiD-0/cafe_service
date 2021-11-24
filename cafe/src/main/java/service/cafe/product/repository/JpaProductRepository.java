@@ -17,24 +17,35 @@ public class JpaProductRepository implements ProductRepository {
 
     @Override
     public Product save(Product product) {
-        return null;
+        em.persist(product);
+        return product;
     }
 
     @Override
-    public List<Product> findAll() { return null; }
+    public List<Product> findAll() {
+        return em.createQuery("select m from Product m", Product.class).getResultList();
+    }
 
     @Override
     public Optional<Product> findById(Long id) {
-        return Optional.empty();
+        return Optional.ofNullable(em.find(Product.class, id));
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        Product product = em.find(Product.class, id);
+        em.remove(product);
+        return true;
     }
 
     @Override
     public Product update(Product product, Long id) {
-        return null;
+        //업데이트 쪼개기 필요?
+        Product newProduct = em.find(Product.class,id);
+        newProduct.setName(product.getName());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setRemain(product.getRemain());
+        return newProduct;
     }
 }

@@ -1,6 +1,7 @@
 package service.cafe.product.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.cafe.product.domain.Product;
 import service.cafe.product.repository.ProductRepository;
 
@@ -12,6 +13,7 @@ public class SaveProductService {
         this.productRepository = productRepository;
     }
 
+    @Transactional
     public Product newProduct(Product product) {
         return productRepository.save(product);
     }
