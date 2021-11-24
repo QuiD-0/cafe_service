@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository {
-    boolean save(Product product);
+    Product save(Product product);
 
     List<Product> findAll();
 
     Optional<Product> findById(Long id);
-
-    Optional<Product> findByName(String name);
 
     boolean delete(Long id);
 
