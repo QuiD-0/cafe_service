@@ -1,8 +1,10 @@
 package service.cafe.product.service;
 
+import org.springframework.stereotype.Service;
 import service.cafe.product.domain.Product;
 import service.cafe.product.repository.ProductRepository;
 
+@Service
 public class SaveProductService {
     private final ProductRepository productRepository;
 
@@ -10,7 +12,7 @@ public class SaveProductService {
         this.productRepository = productRepository;
     }
 
-    Product new_Product(Product product) {
+    public Product new_Product(Product product) {
         return productRepository.save(product);
     }
 }

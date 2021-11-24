@@ -1,12 +1,14 @@
 package service.cafe.product.repository;
 
+import org.springframework.stereotype.Repository;
 import service.cafe.product.domain.Product;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class JpaProductRepository implements ProductRepository{
+@Repository
+public class JpaProductRepository implements ProductRepository {
     private final EntityManager em;
 
     public JpaProductRepository(EntityManager em) {
@@ -19,9 +21,7 @@ public class JpaProductRepository implements ProductRepository{
     }
 
     @Override
-    public List<Product> findAll() {
-        return null;
-    }
+    public List<Product> findAll() { return null; }
 
     @Override
     public Optional<Product> findById(Long id) {
