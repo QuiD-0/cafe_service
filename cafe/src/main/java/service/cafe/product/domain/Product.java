@@ -68,4 +68,9 @@ public class Product {
     public void setRemain(int remain) {
         this.remain = remain;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", price=" + price + ", remain=" + remain + '}';
+    }
 }
