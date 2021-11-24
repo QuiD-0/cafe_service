@@ -1,5 +1,6 @@
 package service.cafe.user.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.cafe.user.domain.User;
 import service.cafe.user.repository.UserRepository;
@@ -7,6 +8,7 @@ import service.cafe.user.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     public UserService(UserRepository userRepository) {
