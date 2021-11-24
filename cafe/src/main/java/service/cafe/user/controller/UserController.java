@@ -23,7 +23,7 @@ public class UserController {
         return users;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public User newUser(@RequestBody User user) {
         userService.join(user);
         return user;

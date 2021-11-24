@@ -1,11 +1,13 @@
 package service.cafe.user.repository;
 
+import org.springframework.stereotype.Repository;
 import service.cafe.user.domain.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JpaUserRepo implements UserRepository {
 
     private final EntityManager em;

@@ -10,10 +10,9 @@ import service.cafe.user.service.UserService;
 import javax.transaction.Transactional;
 
 @SpringBootTest
-//@Transactional
+@Transactional
 public class UserTest {
     @Autowired UserService userService;
-    @Autowired UserRepository userRepository;
 
     @Test
     void 회원가입(){
