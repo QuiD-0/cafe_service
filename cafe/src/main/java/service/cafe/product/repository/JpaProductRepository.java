@@ -40,7 +40,6 @@ public class JpaProductRepository implements ProductRepository {
 
     @Override
     public Product update(Product product, Long id) {
-        //업데이트 쪼개기 필요?
         Product newProduct = em.find(Product.class,id);
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
