@@ -16,7 +16,7 @@ public class FindProductService {
     }
 
     public Product findOne(Long id) throws NotFoundException {
-        return productRepository.findById(id).orElseThrow(() -> new NotFoundException("Not Found"));
+        return productRepository.findById(id).orElseThrow(() -> new NotFoundException("123123"));
     }
 
     public List<Product> findAll() {
