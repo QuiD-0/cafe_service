@@ -42,15 +42,15 @@ public class FindProductTest {
         var exception = Assertions.assertThrows(NotFoundException.class, () -> findProductService.findOne(4L));
 
         Assertions.assertSame(exception.getClass(), NotFoundException.class);
-        Assertions.assertSame(exception.getMessage(), "123123");
+        Assertions.assertSame(exception.getMessage(), "Not Found");
     }
 
     @Test
     void testFindAllProductWhenProductExists() {
         List<Product> givenProducts = new ArrayList<>() {
             {
-                add(new Product("1","2",3,4));
-                add(new Product("5","6",7,8));
+                add(new Product("1", "2", 3, 4));
+                add(new Product("5", "6", 7, 8));
             }
         };
         given(productRepository.findAll()).willReturn(givenProducts);
@@ -58,11 +58,11 @@ public class FindProductTest {
         var products = Assertions.assertDoesNotThrow(() -> findProductService.findAll());
         Assertions.assertEquals(givenProducts, products);
     }
-    
+
     @Test
-    void testFindAllProductWhenProductNotExists(){
+    void testFindAllProductWhenProductNotExists() {
         given(productRepository.findAll()).willReturn(null);
-        var result= productRepository.findAll();
-        Assertions.assertEquals(null,result);
+        var result = productRepository.findAll();
+        Assertions.assertNull(result);
     }
 }
