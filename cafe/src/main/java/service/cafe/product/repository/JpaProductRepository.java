@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public class JpaProductRepository implements ProductRepository {
+
     private final EntityManager em;
 
     public JpaProductRepository(EntityManager em) {
@@ -16,9 +17,9 @@ public class JpaProductRepository implements ProductRepository {
     }
 
     @Override
-    public Product save(Product product) {
+    public boolean save(Product product) {
         em.persist(product);
-        return product;
+        return true;
     }
 
     @Override
@@ -32,6 +33,12 @@ public class JpaProductRepository implements ProductRepository {
     }
 
     @Override
+    public Optional<Product> findByName(String name) {
+        List<Product> result = em.createQuery("select m from Product m where m.name = :name ", Product.class) .setParameter("name", name).getResultList();
+        return result.stream().findAny();
+    }
+
+    @Override
     public boolean delete(Long id) {
         Product product = em.find(Product.class, id);
         em.remove(product);
@@ -40,7 +47,7 @@ public class JpaProductRepository implements ProductRepository {
 
     @Override
     public Product update(Product product, Long id) {
-        Product newProduct = em.find(Product.class,id);
+        Product newProduct = em.find(Product.class, id);
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
         newProduct.setPrice(product.getPrice());
