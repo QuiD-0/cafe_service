@@ -1,4 +1,4 @@
-package service.cafe.product.service;
+package service.cafe.product.repository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
