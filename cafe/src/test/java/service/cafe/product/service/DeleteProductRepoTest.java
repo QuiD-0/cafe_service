@@ -20,7 +20,7 @@ public class DeleteProductRepoTest {
     @Transactional
     public void DeleteRepoTest() {
         Optional<Product> item = productRepository.findByName("Americano");
-        Assertions.assertSame(Product.class,item.get().getClass());
+        Assertions.assertSame(Product.class, item.get().getClass());
 
         productRepository.delete(item.get().getId());
         Assertions.assertSame(Optional.empty(), productRepository.findByName("Americano"));
