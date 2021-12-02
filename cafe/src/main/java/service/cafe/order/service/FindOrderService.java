@@ -16,15 +16,17 @@ public class FindOrderService {
         this.orderRepository = orderRepository;
     }
 
-    public Optional<Order> findOneOrder(Long id) {
+    public Optional<Order> findOneOrderById(Long id) {
         return orderRepository.findById(id);
     }
 
-    public List<Order> findAll() {
+    public List<Order> findAllOrder() {
         return orderRepository.findAll();
     }
 
-    public List<Order> findOnesOrder(Long id) {
+    public List<Order> findDoneOrder() {return orderRepository.findDoneOrder();}
+
+    public List<Order> findOrdersByUserId(Long id) {
         return orderRepository.findByUserId(id);
     }
 

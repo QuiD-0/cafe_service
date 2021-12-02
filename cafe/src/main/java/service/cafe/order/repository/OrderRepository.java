@@ -22,4 +22,6 @@ public interface OrderRepository {
 
     Order updateOrderCount(Order order, int count);
 
+    List<Order> findDoneOrder();
+
 }

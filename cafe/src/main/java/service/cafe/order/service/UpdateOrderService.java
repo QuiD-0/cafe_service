@@ -14,15 +14,15 @@ public class UpdateOrderService {
         this.orderRepository = orderRepository;
     }
 
-    Order changeOrderState(Order order, OrderState orderState) {
+    public Order changeOrderState(Order order, OrderState orderState) {
         return orderRepository.updateOrderState(order, orderState);
     }
 
-    Order changeOrderProductCount(Order order, int count) {
+    public Order changeOrderProductCount(Order order, int count) {
         return orderRepository.updateOrderCount(order, count);
     }
 
-    Order CancelOrder(Order order) {
+    public Order CancelOrder(Order order) {
         return orderRepository.delete(order);
     }
 

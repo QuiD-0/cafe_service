@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class JpaOrderService implements OrderRepository {
+public class JpaOrderRepository implements OrderRepository {
 
     @Override
     public boolean save(Order order) {
@@ -42,6 +42,11 @@ public class JpaOrderService implements OrderRepository {
 
     @Override
     public Order updateOrderCount(Order order, int count) {
+        return null;
+    }
+
+    @Override
+    public List<Order> findDoneOrder() {
         return null;
     }
 

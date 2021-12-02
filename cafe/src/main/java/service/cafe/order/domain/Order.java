@@ -106,4 +106,9 @@ public class Order {
         this.cancelTime = cancelTime;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id + ", userId=" + userId + ", productId=" + productId + ", count=" + count + ", totalOrderPrice=" + totalOrderPrice + ", orderTime=" + orderTime + ", orderState=" + orderState + ", canceled=" + canceled + ", cancelTime=" + cancelTime + '}';
+    }
+
 }
