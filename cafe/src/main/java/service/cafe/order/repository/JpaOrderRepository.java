@@ -1,18 +1,28 @@
 package service.cafe.order.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import service.cafe.order.domain.Order;
 import service.cafe.order.domain.OrderState;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class JpaOrderRepository implements OrderRepository {
 
+    private final EntityManager em;
+
+    public JpaOrderRepository(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
-    public boolean save(Order order) {
-        return false;
+    @Transactional
+    public Order save(Order order) {
+        em.persist(order);
+        return order;
     }
 
     @Override

@@ -3,10 +3,11 @@ package service.cafe.order.domain;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @DynamicUpdate
+@Table(name = "purchase_order")
 public class Order {
 
     @Id
@@ -14,22 +15,20 @@ public class Order {
     private long id;
     private long userId;
     private long productId;
-    private int count;
+    private int itemCount;
     private int totalOrderPrice;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderTime;
+    private LocalDateTime orderTime;
     private OrderState orderState;
     private boolean canceled;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date cancelTime;
+    private LocalDateTime cancelTime;
 
     public Order() {
     }
 
-    public Order(long userId, long productId, int count) {
+    public Order(long userId, long productId, int itemCount) {
         this.userId = userId;
         this.productId = productId;
-        this.count = count;
+        this.itemCount = itemCount;
         this.canceled = false;
         this.orderState = OrderState.Payed;
     }
@@ -59,11 +58,11 @@ public class Order {
     }
 
     public int getCount() {
-        return count;
+        return itemCount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount(int itemCount) {
+        this.itemCount = itemCount;
     }
 
     public int getTotalOrderPrice() {
@@ -74,11 +73,11 @@ public class Order {
         this.totalOrderPrice = totalOrderPrice;
     }
 
-    public Date getOrderTime() {
+    public LocalDateTime getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -98,17 +97,17 @@ public class Order {
         this.canceled = canceled;
     }
 
-    public Date getCancelTime() {
+    public LocalDateTime getCancelTime() {
         return cancelTime;
     }
 
-    public void setCancelTime(Date cancelTime) {
+    public void setCancelTime(LocalDateTime cancelTime) {
         this.cancelTime = cancelTime;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", userId=" + userId + ", productId=" + productId + ", count=" + count + ", totalOrderPrice=" + totalOrderPrice + ", orderTime=" + orderTime + ", orderState=" + orderState + ", canceled=" + canceled + ", cancelTime=" + cancelTime + '}';
+        return "Order{" + "id=" + id + ", userId=" + userId + ", productId=" + productId + ", itemCount=" + itemCount + ", totalOrderPrice=" + totalOrderPrice + ", orderTime=" + orderTime + ", orderState=" + orderState + ", canceled=" + canceled + ", cancelTime=" + cancelTime + '}';
     }
 
 }

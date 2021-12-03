@@ -5,6 +5,7 @@ import service.cafe.order.domain.Order;
 import service.cafe.order.repository.OrderRepository;
 import service.cafe.product.repository.ProductRepository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -18,11 +19,11 @@ public class CreateOrderService {
         this.productRepository = productRepository;
     }
 
-    public Boolean createOrder(Order order) {
+    public Order createOrder(Order order) {
         int productPrice = productRepository.findById(order.getProductId()).get().getPrice();
         order.setTotalOrderPrice(productPrice * order.getCount());
-        order.setOrderTime(new Date());
-        System.out.println(order);
+        LocalDateTime date = LocalDateTime.now();
+        order.setOrderTime(date);
         return orderRepository.save(order);
     }
 

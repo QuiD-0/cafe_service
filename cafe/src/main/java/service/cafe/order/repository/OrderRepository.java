@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface OrderRepository {
 
-    boolean save(Order order);
+    Order save(Order order);
 
     Order delete(Order order);
 
