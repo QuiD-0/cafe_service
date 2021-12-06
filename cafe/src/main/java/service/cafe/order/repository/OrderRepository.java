@@ -20,7 +20,7 @@ public interface OrderRepository {
 
     Order updateOrderState(Order order, OrderState orderState);
 
-    Order updateOrderCount(Order order, int count);
+    Order updateOrderCount(Order order, int count,int totalPrice);
 
     List<Order> findDoneOrder();
 

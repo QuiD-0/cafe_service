@@ -1,11 +1,11 @@
 package service.cafe.order.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import service.cafe.order.domain.Order;
 import service.cafe.order.domain.OrderState;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +19,6 @@ public class JpaOrderRepository implements OrderRepository {
     }
 
     @Override
-    @Transactional
     public Order save(Order order) {
         em.persist(order);
         return order;
@@ -27,7 +26,13 @@ public class JpaOrderRepository implements OrderRepository {
 
     @Override
     public Order delete(Order order) {
-        return null;
+        //주문 삭제 X, 주문 상태 변경
+        Order cancelOrder = em.find(Order.class, order.getId());
+        cancelOrder.setCanceled(true);
+        LocalDateTime date = LocalDateTime.now();
+        cancelOrder.setOrderTime(date);
+        cancelOrder.setOrderState(OrderState.Canceled);
+        return cancelOrder;
     }
 
     @Override
@@ -47,11 +52,16 @@ public class JpaOrderRepository implements OrderRepository {
 
     @Override
     public Order updateOrderState(Order order, OrderState orderState) {
-        return null;
+        Order updatedOrder = em.find(Order.class, order.getId());
+        updatedOrder.setOrderState(orderState);
+        return updatedOrder;
     }
 
     @Override
-    public Order updateOrderCount(Order order, int count) {
+    public Order updateOrderCount(Order order, int count, int totalPrice) {
+        Order updatedOrder = em.find(Order.class, order.getId());
+        updatedOrder.setCount(count);
+        updatedOrder.setTotalOrderPrice(totalPrice);
         return null;
     }
 
