@@ -1,12 +1,12 @@
 package service.cafe.order.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import service.cafe.order.domain.Order;
 import service.cafe.order.repository.OrderRepository;
 import service.cafe.product.repository.ProductRepository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Service
 public class CreateOrderService {
@@ -19,6 +19,7 @@ public class CreateOrderService {
         this.productRepository = productRepository;
     }
 
+    @Transactional
     public Order createOrder(Order order) {
         int productPrice = productRepository.findById(order.getProductId()).get().getPrice();
         order.setTotalOrderPrice(productPrice * order.getCount());
