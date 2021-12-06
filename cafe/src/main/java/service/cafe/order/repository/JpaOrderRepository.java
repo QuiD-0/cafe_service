@@ -25,6 +25,26 @@ public class JpaOrderRepository implements OrderRepository {
     }
 
     @Override
+    public Optional<Order> findById(Long id) {
+        return Optional.ofNullable(em.find(Order.class, id));
+    }
+
+    @Override
+    public List<Order> findByUserId(Long userId) {
+        return em.createQuery("select m from Order m where m.userId = :userId ", Order.class).setParameter("userId", userId).getResultList();
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return em.createQuery("select m from Order m", Order.class).getResultList();
+    }
+
+    @Override
+    public List<Order> findDoneOrder() {
+        return em.createQuery("select m from Order m where m.orderState =: orderState ", Order.class).setParameter("orderState", OrderState.Done).getResultList();
+    }
+
+    @Override
     public Order delete(Order order) {
         //주문 삭제 X, 주문 상태 변경
         Order cancelOrder = em.find(Order.class, order.getId());
@@ -33,21 +53,6 @@ public class JpaOrderRepository implements OrderRepository {
         cancelOrder.setOrderTime(date);
         cancelOrder.setOrderState(OrderState.Canceled);
         return cancelOrder;
-    }
-
-    @Override
-    public Optional<Order> findById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<Order> findByUserId(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Order> findAll() {
-        return null;
     }
 
     @Override
@@ -62,11 +67,6 @@ public class JpaOrderRepository implements OrderRepository {
         Order updatedOrder = em.find(Order.class, order.getId());
         updatedOrder.setCount(count);
         updatedOrder.setTotalOrderPrice(totalPrice);
-        return null;
-    }
-
-    @Override
-    public List<Order> findDoneOrder() {
         return null;
     }
 
