@@ -28,8 +28,8 @@ public class OrderFindServiceTest {
     OrderRepository orderRepository;
 
     @Test
-    @DisplayName("ID로 주문 검색하기")
-    public void findByIdTest() {
+    @DisplayName("ID로 주문 검색하기(있을경우)")
+    public void findByIdTestWhenExist() {
         Order order = new Order(1L, 1L, 1);
         given(orderRepository.findById(anyLong())).willReturn(Optional.ofNullable(order));
 
@@ -37,6 +37,16 @@ public class OrderFindServiceTest {
 
         Assertions.assertEquals(order.getUserId(), foundOrder.get().getUserId());
         Assertions.assertEquals(order.getProductId(), foundOrder.get().getProductId());
+    }
+
+    @Test
+    @DisplayName("ID로 주문 검색하기(없을경우)")
+    public void findByIdTestWhenNotExist() {
+        given(orderRepository.findById(anyLong())).willReturn(Optional.empty());
+
+        Optional<Order> foundOrder = findOrderService.findOneOrderById(1L);
+
+        Assertions.assertEquals(foundOrder, Optional.empty());
     }
 
     @Test
@@ -89,7 +99,7 @@ public class OrderFindServiceTest {
         List<Order> foundOrders = findOrderService.findDoneOrder();
 
         Assertions.assertEquals(foundOrders, orders);
-        Assertions.assertEquals(foundOrders.get(0).getOrderState(), orders.get(0).getOrderState());
+        Assertions.assertEquals(foundOrders.get(0).getOrderState(), OrderState.Done);
     }
 
 }
