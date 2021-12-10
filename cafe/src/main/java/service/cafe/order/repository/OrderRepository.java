@@ -12,6 +12,8 @@ public interface OrderRepository {
 
     Order delete(Order order);
 
+    Boolean hardDelete(Order order);
+
     Optional<Order> findById(Long id);
 
     List<Order> findByUserId(Long id);

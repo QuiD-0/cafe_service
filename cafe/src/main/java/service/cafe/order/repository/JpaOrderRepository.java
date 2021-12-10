@@ -56,6 +56,13 @@ public class JpaOrderRepository implements OrderRepository {
     }
 
     @Override
+    public Boolean hardDelete(Order order){
+        em.find(Order.class,order.getId());
+        em.remove(order);
+        return true;
+    }
+
+    @Override
     public Order updateOrderState(Order order, OrderState orderState) {
         Order updatedOrder = em.find(Order.class, order.getId());
         updatedOrder.setOrderState(orderState);
