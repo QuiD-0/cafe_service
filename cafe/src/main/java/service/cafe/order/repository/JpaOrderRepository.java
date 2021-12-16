@@ -72,7 +72,7 @@ public class JpaOrderRepository implements OrderRepository {
     @Override
     public Order updateOrderCount(Order order, int count, int totalPrice) {
         Order updatedOrder = em.find(Order.class, order.getId());
-        updatedOrder.setCount(count);
+        updatedOrder.setItemCount(count);
         updatedOrder.setTotalOrderPrice(totalPrice);
         return null;
     }

@@ -60,7 +60,7 @@ public class OrderUpdateService {
     public void updateOrderCountTest() throws NotFoundException {
         Order order = new Order(1L, 1L, 1);
         Product product = new Product("Coffee", "Test", 2000, 10);
-        order.setTotalOrderPrice(product.getPrice() * order.getCount());
+        order.setTotalOrderPrice(product.getPrice() * order.getItemCount());
         given(findProductService.findOne(anyLong())).willReturn(product);
         given(orderRepository.updateOrderCount(any(), anyInt(), anyInt())).willReturn(order);
 

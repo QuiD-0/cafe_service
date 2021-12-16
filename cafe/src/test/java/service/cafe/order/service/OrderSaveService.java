@@ -42,7 +42,7 @@ public class OrderSaveService {
         Order newOrder = createOrderService.createOrder(order);
 
         Assertions.assertEquals(order.getUserId(), newOrder.getUserId());
-        Assertions.assertEquals(newOrder.getTotalOrderPrice(), order.getCount() * product.getPrice());
+        Assertions.assertEquals(newOrder.getTotalOrderPrice(), order.getItemCount() * product.getPrice());
     }
 
 }
