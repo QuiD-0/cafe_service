@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Service
 public class SaveProductService {
+
     private final ProductRepository productRepository;
 
     public SaveProductService(ProductRepository productRepository) {
@@ -16,12 +17,13 @@ public class SaveProductService {
     }
 
     @Transactional
-    public boolean newProduct(Product product) {
+    public Product newProduct(Product product) {
         Optional<Product> item = productRepository.findByName(product.getName());
         if (item.isEmpty()) {
             return productRepository.save(product);
         } else {
-            return false;
+            return null;
         }
     }
+
 }
