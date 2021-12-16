@@ -25,14 +25,14 @@ public class SaveProductServiceTest {
 
     @Test
     public void saveTestWhenAlreadyExist() {
-        given(productRepository.save(any())).willReturn(false);
+        given(productRepository.save(any())).willReturn(alreadyExistItem);
 
         Assertions.assertSame(saveProductService.newProduct(alreadyExistItem), false);
     }
 
     @Test
     public void saveTestWhenNotExist() {
-        given(productRepository.save(any())).willReturn(true);
+        given(productRepository.save(any())).willReturn(notExistItem);
 
         Assertions.assertSame(saveProductService.newProduct(notExistItem), true);
     }

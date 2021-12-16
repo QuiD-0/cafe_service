@@ -17,9 +17,9 @@ public class JpaProductRepository implements ProductRepository {
     }
 
     @Override
-    public boolean save(Product product) {
+    public Product save(Product product) {
         em.persist(product);
-        return true;
+        return product;
     }
 
     @Override
