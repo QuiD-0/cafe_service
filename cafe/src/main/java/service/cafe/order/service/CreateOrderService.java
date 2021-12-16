@@ -29,10 +29,10 @@ public class CreateOrderService {
     @Transactional
     public Order createOrder(Order order) {
         Product buyItem = productRepository.findById(order.getProductId()).get();
-        if (buyItem.getRemain() >= order.getCount()) {
-            buyItem.setRemain(buyItem.getRemain() - order.getCount());
+        if (buyItem.getRemain() >= order.getItemCount()) {
+            buyItem.setRemain(buyItem.getRemain() - order.getItemCount());
             updateProductService.updateProduct(buyItem, buyItem.getId());
-            order.setTotalOrderPrice(buyItem.getPrice() * order.getCount());
+            order.setTotalOrderPrice(buyItem.getPrice() * order.getItemCount());
             LocalDateTime date = LocalDateTime.now();
             order.setOrderTime(date);
             return orderRepository.save(order);
