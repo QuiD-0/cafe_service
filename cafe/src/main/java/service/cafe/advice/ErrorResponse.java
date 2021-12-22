@@ -2,12 +2,13 @@ package service.cafe.advice;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
-@AllArgsConstructor()
+@AllArgsConstructor
 public class ErrorResponse {
 
     private String message;
-    private int status;
+    private HttpStatus status;
 
 }

@@ -2,7 +2,8 @@ package service.cafe.user.controller;
 
 import javassist.NotFoundException;
 import org.springframework.web.bind.annotation.*;
-import service.cafe.advice.CustomException;
+import service.cafe.advice.exceptions.UserNameNotExistsException;
+import service.cafe.advice.exceptions.UserNotFoundException;
 import service.cafe.user.domain.User;
 import service.cafe.user.service.UserService;
 
@@ -19,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<User> showUsers() throws NotFoundException {
         List<User> users = userService.findUsers();
         if (users == null) {
@@ -28,19 +29,19 @@ public class UserController {
         return users;
     }
 
-    @PostMapping("")
-    public User newUser(@RequestBody User user) throws CustomException {
+    @PostMapping
+    public User newUser(@RequestBody User user) throws UserNameNotExistsException {
         if (user.getName() == null) {
-            throw new CustomException("사용자 정보가 부족합니다.");
+            throw new UserNameNotExistsException();
         }
         userService.join(user);
         return user;
     }
 
-    @GetMapping(path = "/{userId}")
-    public User findUser(@PathVariable(name = "userId") Long id) throws NotFoundException {
+    @GetMapping("/{userId}")
+    public User findUser(@PathVariable(name = "userId") Long id) throws UserNotFoundException {
         Optional<User> user = userService.findOne(id);
-        return user.orElseThrow(() -> new NotFoundException("해당 id의 사용자가 없습니다."));
+        return user.orElseThrow(() -> new UserNotFoundException());
     }
 
     @PutMapping("/{userId}")
